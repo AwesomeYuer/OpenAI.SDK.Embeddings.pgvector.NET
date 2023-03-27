@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <PackageId>Pgvector</PackageId>
+    <Version>0.1.1</Version>
+    <Authors>ankane</Authors>
+    <Description>pgvector support for C#</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/pgvector/pgvector-dotnet</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Npgsql" Version="7.0.2" />
+  </ItemGroup>
+
+</Project>
