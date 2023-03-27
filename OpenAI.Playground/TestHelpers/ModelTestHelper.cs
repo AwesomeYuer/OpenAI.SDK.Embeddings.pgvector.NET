@@ -21,11 +21,11 @@ internal static class ModelTestHelper
             ConsoleExtensions.WriteLine("Models:", ConsoleColor.DarkGreen);
             Console.WriteLine(string.Join(Environment.NewLine, modelList.Models.Select(r => r.Id)));
 
-            foreach (var modelItem in modelList.Models)
+            foreach (var modelItem in modelList.Models!)
             {
                 ConsoleExtensions.WriteLine($"Retrieving Model:{modelItem.Id}", ConsoleColor.DarkCyan);
 
-                var retrieveModelResponse = await sdk.Models.RetrieveModel(modelItem.Id);
+                var retrieveModelResponse = await sdk.Models.RetrieveModel(modelItem.Id!);
                 if (retrieveModelResponse.Successful)
                 {
                     Console.WriteLine(retrieveModelResponse);

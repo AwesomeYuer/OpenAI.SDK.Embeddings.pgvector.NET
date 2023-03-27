@@ -4,7 +4,7 @@ public interface IOpenAiModels
 {
     public interface IId
     {
-        string Id { get; set; }
+        string? Id { get; set; }
     }
 
     public interface IModel
@@ -19,7 +19,7 @@ public interface IOpenAiModels
 
     public interface ILogProbsResponse
     {
-        LogProbsResponse LogProbs { get; set; }
+        LogProbsResponse? LogProbs { get; set; }
     }
 
     public interface ITemperature
@@ -34,12 +34,12 @@ public interface IOpenAiModels
 
     public interface IUser
     {
-        public string User { get; set; }
+        public string? User { get; set; }
     }
 
     public interface IFile
     {
-        public byte[] File { get; set; }
-        public string FileName { get; set; }
+        public byte[]? File { get; set; }
+        public string? FileName { get; set; }
     }
 }

@@ -47,11 +47,11 @@ public partial class OpenAIService : IImageService
 
         if (imageEditCreateRequest.Mask != null)
         {
-            multipartContent.Add(new ByteArrayContent(imageEditCreateRequest.Mask), "mask", imageEditCreateRequest.MaskName);
+            multipartContent.Add(new ByteArrayContent(imageEditCreateRequest.Mask), "mask", imageEditCreateRequest.MaskName!);
         }
 
-        multipartContent.Add(new StringContent(imageEditCreateRequest.Prompt), "prompt");
-        multipartContent.Add(new ByteArrayContent(imageEditCreateRequest.Image), "image", imageEditCreateRequest.ImageName);
+        multipartContent.Add(new StringContent(imageEditCreateRequest.Prompt!), "prompt");
+        multipartContent.Add(new ByteArrayContent(imageEditCreateRequest.Image!), "image", imageEditCreateRequest.ImageName!);
 
         return await _httpClient.PostFileAndReadAsAsync<ImageCreateResponse>(_endpointProvider.ImageEditCreate(), multipartContent, cancellationToken);
     }
@@ -84,7 +84,7 @@ public partial class OpenAIService : IImageService
             multipartContent.Add(new StringContent(imageEditCreateRequest.N.ToString()!), "n");
         }
 
-        multipartContent.Add(new ByteArrayContent(imageEditCreateRequest.Image), "image", imageEditCreateRequest.ImageName);
+        multipartContent.Add(new ByteArrayContent(imageEditCreateRequest.Image!), "image", imageEditCreateRequest.ImageName!);
 
         return await _httpClient.PostFileAndReadAsAsync<ImageCreateResponse>(_endpointProvider.ImageVariationCreate(), multipartContent, cancellationToken);
     }

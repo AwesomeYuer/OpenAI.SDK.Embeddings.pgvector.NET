@@ -29,11 +29,11 @@ internal static class FineTuningTestHelper
 
             var createFineTuneResponse = await sdk.FineTunes.CreateFineTune(new FineTuneCreateRequest
             {
-                TrainingFile = uploadFilesResponse.Id,
+                TrainingFile = uploadFilesResponse.Id!,
                 Model = Models.Ada
             });
 
-            var listFineTuneEventsStream = await sdk.FineTunes.ListFineTuneEvents(createFineTuneResponse.Id, true);
+            var listFineTuneEventsStream = await sdk.FineTunes.ListFineTuneEvents(createFineTuneResponse.Id!, true);
             using var streamReader = new StreamReader(listFineTuneEventsStream);
             while (!streamReader.EndOfStream)
             {
@@ -43,7 +43,7 @@ internal static class FineTuningTestHelper
             FineTuneResponse retrieveFineTuneResponse;
             do
             {
-                retrieveFineTuneResponse = await sdk.FineTunes.RetrieveFineTune(createFineTuneResponse.Id);
+                retrieveFineTuneResponse = await sdk.FineTunes.RetrieveFineTune(createFineTuneResponse.Id!);
                 if (retrieveFineTuneResponse.Status == "succeeded" || retrieveFineTuneResponse.Status == "cancelled" || retrieveFineTuneResponse.Status == "failed")
                 {
                     ConsoleExtensions.WriteLine($"Fine-tune Status for {createFineTuneResponse.Id}: {retrieveFineTuneResponse.Status}.", ConsoleColor.Yellow);
@@ -82,9 +82,9 @@ internal static class FineTuningTestHelper
     public static async Task CleanUpAllFineTunings(IOpenAIService sdk)
     {
         var fineTunes = await sdk.FineTunes.ListFineTunes();
-        foreach (var datum in fineTunes.Data)
+        foreach (var datum in fineTunes.Data!)
         {
-            await sdk.FineTunes.DeleteFineTune(datum.FineTunedModel);
+            await sdk.FineTunes.DeleteFineTune(datum.FineTunedModel!);
         }
     }
 }

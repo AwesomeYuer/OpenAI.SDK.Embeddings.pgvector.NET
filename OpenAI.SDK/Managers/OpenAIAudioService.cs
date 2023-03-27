@@ -26,8 +26,8 @@ public partial class OpenAIService : IAudioService
     {
         var multipartContent = new MultipartFormDataContent
         {
-            {new ByteArrayContent(audioCreateTranscriptionRequest.File), "file", audioCreateTranscriptionRequest.FileName},
-            {new StringContent(audioCreateTranscriptionRequest.Model), "model"}
+            {new ByteArrayContent(audioCreateTranscriptionRequest.File!), "file", audioCreateTranscriptionRequest.FileName!},
+            {new StringContent(audioCreateTranscriptionRequest.Model!), "model"}
         };
         if (audioCreateTranscriptionRequest.Language != null)
         {

@@ -14,7 +14,7 @@ public class ChatCompletionCreateRequest : IModelValidate, IOpenAiModels.ITemper
     ///     short as 1 message or fill many pages.
     /// </summary>
     [JsonPropertyName("messages")]
-    public IList<ChatMessage> Messages { get; set; }
+    public IList<ChatMessage>? Messages { get; set; }
 
     /// <summary>
     ///     An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the
@@ -133,5 +133,5 @@ public class ChatCompletionCreateRequest : IModelValidate, IOpenAiModels.ITemper
     ///     A unique identifier representing your end-user, which can help OpenAI to monitor and detect abuse. Learn more.
     /// </summary>
     [JsonPropertyName("user")]
-    public string User { get; set; }
+    public string? User { get; set; }
 }

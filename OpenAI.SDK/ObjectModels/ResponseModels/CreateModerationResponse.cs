@@ -5,18 +5,18 @@ namespace OpenAI.GPT3.ObjectModels.ResponseModels;
 
 public record CreateModerationResponse : BaseResponse, IOpenAiModels.IModel, IOpenAiModels.IId
 {
-    [JsonPropertyName("results")] public List<Result> Results { get; set; }
+    [JsonPropertyName("results")] public List<Result>? Results { get; set; }
 
-    [JsonPropertyName("id")] public string Id { get; set; }
+    [JsonPropertyName("id")] public string? Id { get; set; }
 
-    [JsonPropertyName("model")] public string Model { get; set; }
+    [JsonPropertyName("model")] public string? Model { get; set; }
 }
 
 public record Result
 {
-    [JsonPropertyName("categories")] public Categories Categories { get; set; }
+    [JsonPropertyName("categories")] public Categories? Categories { get; set; }
 
-    [JsonPropertyName("category_scores")] public CategoryScores CategoryScores { get; set; }
+    [JsonPropertyName("category_scores")] public CategoryScores? CategoryScores { get; set; }
 
     [JsonPropertyName("flagged")] public bool Flagged { get; set; }
 }

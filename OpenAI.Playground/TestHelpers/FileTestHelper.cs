@@ -34,10 +34,10 @@ internal static class FileTestHelper
 
             ConsoleExtensions.WriteLine("Need to wait for file processing", ConsoleColor.White);
             await Task.Delay(10_000);
-            foreach (var uploadedFile in uploadedFiles.Data)
+            foreach (var uploadedFile in uploadedFiles.Data!)
             {
                 ConsoleExtensions.WriteLine($"Retrieving {uploadedFile.FileName}", ConsoleColor.DarkCyan);
-                var retrieveFileResponse = await sdk.Files.RetrieveFile(uploadedFile.Id);
+                var retrieveFileResponse = await sdk.Files.RetrieveFile(uploadedFile.Id!);
                 if (retrieveFileResponse.Successful)
                 {
                     ConsoleExtensions.WriteLine($"{retrieveFileResponse.FileName} retrieved", ConsoleColor.DarkGreen);
@@ -47,7 +47,7 @@ internal static class FileTestHelper
                     ConsoleExtensions.WriteLine($"Retrieve {retrieveFileResponse.FileName} failed", ConsoleColor.Red);
                 }
 
-                var retrieveFileContentResponse = await sdk.Files.RetrieveFileContent(uploadedFile.Id);
+                var retrieveFileContentResponse = await sdk.Files.RetrieveFileContent(uploadedFile.Id!);
                 if (retrieveFileContentResponse.Successful && retrieveFileContentResponse.Content?.Equals(sampleFileAsString) == true)
                 {
                     ConsoleExtensions.WriteLine($"retrieved content as string:{Environment.NewLine}{retrieveFileContentResponse.Content} ", ConsoleColor.DarkGreen);
@@ -57,7 +57,7 @@ internal static class FileTestHelper
                     ConsoleExtensions.WriteLine($"Retrieve {retrieveFileResponse.FileName} failed", ConsoleColor.Red);
                 }
 
-                var retrieveFileContentResponseAsByteArray = await sdk.Files.RetrieveFileContent<byte[]>(uploadedFile.Id);
+                var retrieveFileContentResponseAsByteArray = await sdk.Files.RetrieveFileContent<byte[]>(uploadedFile.Id!);
                 if (retrieveFileContentResponseAsByteArray.Content != null && sampleFileAsString == Encoding.UTF8.GetString(retrieveFileContentResponseAsByteArray.Content))
                 {
                     ConsoleExtensions.WriteLine($"retrieved content as byteArray:{Environment.NewLine}{Encoding.UTF8.GetString(retrieveFileContentResponseAsByteArray.Content)} ", ConsoleColor.DarkGreen);
@@ -67,7 +67,7 @@ internal static class FileTestHelper
                     ConsoleExtensions.WriteLine($"Retrieve {retrieveFileResponse.FileName} failed", ConsoleColor.Red);
                 }
 
-                var retrieveFileContentResponseAsStream = await sdk.Files.RetrieveFileContent<Stream>(uploadedFile.Id);
+                var retrieveFileContentResponseAsStream = await sdk.Files.RetrieveFileContent<Stream>(uploadedFile.Id!);
 
                 if (retrieveFileContentResponseAsStream.Content != null)
                 {
@@ -89,7 +89,7 @@ internal static class FileTestHelper
 
                 //   var fileContent = sdk.Files.RetrieveFileContent(file.Id);
                 ConsoleExtensions.WriteLine($"Deleting file {uploadedFile.FileName}", ConsoleColor.DarkCyan);
-                var deleteResponse = await sdk.Files.DeleteFile(uploadedFile.Id);
+                var deleteResponse = await sdk.Files.DeleteFile(uploadedFile.Id!);
                 if (deleteResponse.Successful)
                 {
                     ConsoleExtensions.WriteLine($"{retrieveFileResponse.FileName} deleted", ConsoleColor.DarkGreen);
@@ -114,10 +114,10 @@ internal static class FileTestHelper
         {
             Console.WriteLine("Starting to clean All Files");
             var uploadedFiles = await sdk.Files.ListFile();
-            foreach (var uploadedFile in uploadedFiles.Data)
+            foreach (var uploadedFile in uploadedFiles.Data!)
             {
                 Console.WriteLine(uploadedFile.FileName);
-                var deleteResponse = await sdk.Files.DeleteFile(uploadedFile.Id);
+                var deleteResponse = await sdk.Files.DeleteFile(uploadedFile.Id!);
             }
         }
         catch (Exception e)
